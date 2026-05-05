@@ -5,6 +5,10 @@
 <title>अनकहे लफ्ज़</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FFD700">
+
 <style>
 body{
   margin:0;
@@ -78,7 +82,7 @@ body{
   margin-bottom:10px;
 }
 
-/* CONTENT FULL HEIGHT */
+/* CONTENT */
 #content{
   flex:1;
   width:100%;
@@ -99,7 +103,7 @@ body{
   cursor:pointer;
 }
 
-/* SAVE BUTTON */
+/* SAVE */
 .saveBtn{
   background:#87CEEB;
   border:none;
@@ -114,10 +118,10 @@ body{
 
 <div class="header">अनकहे लफ्ज़</div>
 
-<!-- LIST PAGE -->
+<!-- LIST -->
 <div id="listPage" class="list"></div>
 
-<!-- EDITOR PAGE -->
+<!-- EDITOR -->
 <div id="editor">
   <div class="back" onclick="goBack()">← Back</div>
 
@@ -132,10 +136,15 @@ body{
 
 <script>
 
+// REGISTER SERVICE WORKER
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+
 let notes = JSON.parse(localStorage.getItem("kavita")||"[]");
 let current = null;
 
-// LOAD LIST
+// LOAD
 function load(){
   let list = document.getElementById("listPage");
   list.innerHTML="";
@@ -156,7 +165,7 @@ function load(){
   });
 }
 
-// NEW NOTE
+// NEW
 function newNote(){
   current = null;
   document.getElementById("title").value="";
@@ -164,7 +173,7 @@ function newNote(){
   openEditor();
 }
 
-// OPEN NOTE
+// OPEN
 function openNote(i){
   current = i;
   let n = notes[i];
@@ -215,4 +224,5 @@ load();
 </script>
 
 </body>
-  </html>
+    </html>
+    
